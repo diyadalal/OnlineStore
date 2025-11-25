@@ -29,21 +29,6 @@ public class StoreDBInitializer {
                 );
             """);
 
-            stmt.executeUpdate("""
-                CREATE TABLE Address (
-                    address_id INT AUTO_INCREMENT PRIMARY KEY,
-                    customer_id INT,
-                    street VARCHAR(100),
-                    city VARCHAR(100),
-                    state VARCHAR(100),
-                    zip_code VARCHAR(100),
-                    is_default BOOLEAN DEFAULT TRUE,
-                    CONSTRAINT fk_customer_address
-                        FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
-                        ON DELETE CASCADE
-                        ON UPDATE CASCADE
-                );
-            """);
 
             stmt.executeUpdate("""
                 CREATE TABLE Category (
@@ -71,19 +56,6 @@ public class StoreDBInitializer {
                 );
             """);
 
-            stmt.executeUpdate("""
-                CREATE TABLE Size (
-                    size_id INT AUTO_INCREMENT PRIMARY KEY,
-                    size_label VARCHAR(10) UNIQUE NOT NULL
-                );
-            """);
-
-            stmt.executeUpdate("""
-                CREATE TABLE Color (
-                    color_id INT AUTO_INCREMENT PRIMARY KEY,
-                    color_label VARCHAR(10) UNIQUE NOT NULL
-                );
-            """);
 
             stmt.executeUpdate("""
                 CREATE TABLE Product_Variant (
@@ -140,20 +112,6 @@ public class StoreDBInitializer {
                 );
             """);
 
-            stmt.executeUpdate("""
-                CREATE TABLE Payment (
-                    payment_id INT AUTO_INCREMENT PRIMARY KEY,
-                    order_id INT NOT NULL,
-                    total DECIMAL(10, 2),
-                    status ENUM('Pending', 'Completed', 'Failed', 'Refunded') DEFAULT 'Pending',
-                    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    CONSTRAINT fk_order_payment
-                        FOREIGN KEY (order_id) REFERENCES Customer_Order(order_id)
-                        ON DELETE CASCADE
-                        ON UPDATE CASCADE,
-                    CHECK (total > 0)
-                );
-            """);
 
             stmt.executeUpdate("""
                 CREATE TABLE Cart (
@@ -171,39 +129,7 @@ public class StoreDBInitializer {
                 );
             """);
 
-            stmt.executeUpdate("""
-                CREATE TABLE Review (
-                    review_id INT AUTO_INCREMENT PRIMARY KEY,
-                    customer_id INT NOT NULL,
-                    variant_id INT NOT NULL,
-                    rating INT NOT NULL,
-                    description TEXT,
-                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    CONSTRAINT fk_customer_review
-                        FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
-                        ON DELETE CASCADE
-                        ON UPDATE CASCADE,
-                    CONSTRAINT fk_variant_review
-                        FOREIGN KEY (variant_id) REFERENCES Product_Variant(variant_id)
-                        ON DELETE CASCADE
-                        ON UPDATE CASCADE,
-                    CHECK (rating BETWEEN 1 AND 5)
-                );
-            """);
 
-            stmt.executeUpdate("""
-                CREATE TABLE Inventory_Log (
-                    log_id INT AUTO_INCREMENT PRIMARY KEY,
-                    variant_id INT NOT NULL,
-                    change_qty INT NOT NULL,
-                    reason ENUM('Sold', 'Restock', 'Return'),
-                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-                    CONSTRAINT fk_variant_inventory_log
-                        FOREIGN KEY (variant_id) REFERENCES Product_Variant(variant_id)
-                        ON DELETE CASCADE
-                        ON UPDATE CASCADE
-                );
-            """);
 
             System.out.println("Database created");
 
