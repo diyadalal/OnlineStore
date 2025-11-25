@@ -24,7 +24,6 @@ public class StoreDBInitializer {
                     last_name VARCHAR(100) NOT NULL,
                     email VARCHAR(100) UNIQUE NOT NULL,
                     password_hash VARCHAR(100),
-                    phone VARCHAR(50),
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
                 );
             """);
