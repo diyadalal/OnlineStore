@@ -53,50 +53,47 @@ CREATE TABLE Product (
 	CHECK (price > 0)
 );
 
-CREATE TABLE Size (
-    size_id INT AUTO_INCREMENT PRIMARY KEY,
-    size_label VARCHAR(10) UNIQUE NOT NULL
-);
-
-CREATE TABLE Color (
-    color_id INT AUTO_INCREMENT PRIMARY KEY,
-    color_label VARCHAR(10) UNIQUE NOT NULL
-);
-
 CREATE TABLE Product_Variant (
 	variant_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
-	size_id INT,		
-    color_id INT,
+	size_id ENUM('Black', 'White', 'Grey', 'Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Pink'),		
+    color_id ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'),
     stock INT,
     
     CONSTRAINT fk_product_product_variant
 		FOREIGN KEY (product_id) REFERENCES Product(product_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-        
-	FOREIGN KEY (size_id) REFERENCES Size(size_id),
-	FOREIGN KEY (color_id) REFERENCES Color(color_id),
     
 	CHECK (stock >= 0)
 );
 
 CREATE TABLE Customer_Order (
-	order_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    
+    -- Customer & shipping relationships
     customer_id INT NOT NULL,
     address_id INT NOT NULL,
+
+    -- Order info
     total_price DECIMAL(10, 2) NOT NULL,
     order_status ENUM('Pending', 'Paid', 'Shipped', 'Delivered', 'Cancelled'),
+
+    -- Payment info (merged from Payment table)
+    payment_total DECIMAL(10, 2) CHECK (payment_total > 0),
+    payment_status ENUM('Pending', 'Completed', 'Failed', 'Refunded') DEFAULT 'Pending',
+    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     payment_method ENUM('Credit Card', 'Debit', 'PayPal', 'Apple Pay', 'Other'),
-	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    
-	CONSTRAINT fk_customer_order
-		FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_customer_order
+        FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-        
-	CONSTRAINT fk_address_order
-		FOREIGN KEY (address_id) REFERENCES Address(address_id)
+
+    CONSTRAINT fk_address_order
+        FOREIGN KEY (address_id) REFERENCES Address(address_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
@@ -119,21 +116,6 @@ CREATE TABLE Order_Item (
         ON UPDATE CASCADE,
         
 	CHECK (quantity > 0)
-);
-
-CREATE TABLE Payment (
-	payment_id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    total DECIMAL(10, 2),
-    status ENUM('Pending', 'Completed', 'Failed', 'Refunded') DEFAULT 'Pending',
-    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT fk_order_payment
-		FOREIGN KEY (order_id) REFERENCES Customer_Order(order_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-        
-	CHECK (total > 0)
 );
 
 CREATE TABLE Cart (
