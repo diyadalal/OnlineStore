@@ -1,27 +1,29 @@
 package com.project.model;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
-public class Customer {
+public class Customers {
     private int customerId;
     private String firstName;
     private String lastName;
     private String email;
+    private String address; // Combined address string
+    private BigDecimal balance;
+    // IMPORTANT: This holds the hashed BCrypt string, NEVER plain text.
     private String passwordHash;
-    private String phone;
-    private LocalDateTime createdAt;
 
-    // Constructors
-    public Customer() {}
+    // Empty Constructor (often needed by frameworks)
+    public Customers() {}
 
-    public Customer(int customerId, String firstName, String lastName, String email, String passwordHash, String phone, LocalDateTime createdAt) {
+    // Full Constructor (useful for reading from DB)
+    public Customers(int customerId, String firstName, String lastName, String email, String address, BigDecimal balance, String passwordHash) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.address = address;
+        this.balance = balance;
         this.passwordHash = passwordHash;
-        this.phone = phone;
-        this.createdAt = createdAt;
     }
 
     // Getters and Setters
@@ -33,10 +35,10 @@ public class Customer {
     public void setLastName(String lastName) { this.lastName = lastName; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
+    public BigDecimal getBalance() { return balance; }
+    public void setBalance(BigDecimal balance) { this.balance = balance; }
     public String getPasswordHash() { return passwordHash; }
     public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
-    public String getPhone() { return phone; }
-    public void setPhone(String phone) { this.phone = phone; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
