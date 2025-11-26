@@ -60,15 +60,13 @@ public class StoreDBInitializer {
                 CREATE TABLE Product_Variant (
                     variant_id INT AUTO_INCREMENT PRIMARY KEY,
                     product_id INT,
-                    size_id INT,
-                    color_id INT,
+                    size_id ENUM('Black', 'White', 'Grey', 'Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Pink'),		
+                    color_id ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'),
                     stock INT,
                     CONSTRAINT fk_product_product_variant
                         FOREIGN KEY (product_id) REFERENCES Product(product_id)
                         ON DELETE CASCADE
                         ON UPDATE CASCADE,
-                    FOREIGN KEY (size_id) REFERENCES Size(size_id),
-                    FOREIGN KEY (color_id) REFERENCES Color(color_id),
                     CHECK (stock >= 0)
                 );
             """);
@@ -80,6 +78,9 @@ public class StoreDBInitializer {
                     address_id INT NOT NULL,
                     total_price DECIMAL(10, 2) NOT NULL,
                     order_status ENUM('Pending', 'Paid', 'Shipped', 'Delivered', 'Cancelled'),
+                    payment_total DECIMAL(10, 2) CHECK (payment_total > 0),
+                    payment_status ENUM('Pending', 'Completed', 'Failed', 'Refunded') DEFAULT 'Pending',
+                    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
                     payment_method ENUM('Credit Card', 'Debit', 'PayPal', 'Apple Pay', 'Other'),
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     CONSTRAINT fk_customer_order
