@@ -25,6 +25,7 @@ public class StoreDBInitializer {
                     email VARCHAR(100) UNIQUE NOT NULL,
                     password_hash VARCHAR(255) NOT NULL,
                     phone VARCHAR(50),
+                    balance DECIMAL(10,2) NOT NULL DEFAULT 0.00,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
                 );
             """);
@@ -77,32 +78,18 @@ public class StoreDBInitializer {
                 CREATE TABLE Customer_Order (
                     order_id INT AUTO_INCREMENT PRIMARY KEY,
                     customer_id INT NOT NULL,
+                    variant_id INT NOT NULL,
+                    quantity INT NOT NULL CHECK(quantity > 0),
                     total_price DECIMAL(10,2) NOT NULL CHECK(total_price >= 0),
                     order_status ENUM('Pending','Paid','Shipped','Delivered','Cancelled')
-                        DEFAULT 'Pending',
+                    DEFAULT 'Pending',
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
                     FOREIGN KEY (customer_id)
-                        REFERENCES Customer(customer_id)
-                );
-            """);
-            
-            stmt.executeUpdate("""
-                CREATE TABLE Order_Item (
-                    order_item_id INT AUTO_INCREMENT PRIMARY KEY,
-                    order_id INT NOT NULL,
-                    variant_id INT NOT NULL,
-                    quantity INT NOT NULL CHECK(quantity > 0),
-                    price_each DECIMAL(10,2) NOT NULL CHECK(price_each >= 0),
-
-                    FOREIGN KEY (order_id)
-                        REFERENCES Customer_Order(order_id)
-                        ON DELETE CASCADE,
+                        REFERENCES Customer(customer_id),
 
                     FOREIGN KEY (variant_id)
-                        REFERENCES Product_Variant(variant_id),
-
-                    UNIQUE (order_id, variant_id)
+                        REFERENCES Product_Variant(variant_id)
                 );
             """);
 
