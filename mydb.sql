@@ -16,15 +16,11 @@ CREATE TABLE Customer (
 CREATE TABLE Product (
 	product_id INT AUTO_INCREMENT PRIMARY KEY,
 	name varchar(255) NOT NULL,
+	category ENUM('Shirt', 'Blouse', 'Sweater', 'Hoodie', 'Jacket', 'Coat', 'Tank Top', 'Pants', 'Shorts', 'Skirt', 'Dress', 'Suit'),
     description TEXT,
     brand varchar(100),
     price DECIMAL(10, 2) NOT NULL,
     sold boolean DEFAULT FALSE,
-    
-    CONSTRAINT fk_product_category
-		FOREIGN KEY (category_id) REFERENCES Category(category_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
         
 	CHECK (price > 0)
 );
@@ -32,8 +28,8 @@ CREATE TABLE Product (
 CREATE TABLE Product_Variant (
 	variant_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
-	size_id ENUM('Black', 'White', 'Grey', 'Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Pink'),		
-    color_id ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'),
+	color_id ENUM('Black', 'White', 'Grey', 'Red', 'Blue', 'Green', 'Yellow', 'Orange', 'Purple', 'Pink'),		
+    size_id ENUM('XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL'),
     stock INT,
     
     CONSTRAINT fk_product_product_variant
