@@ -32,13 +32,6 @@ public class StoreDBInitializer {
 
 
             stmt.executeUpdate("""
-                CREATE TABLE Category (
-                    category_id INT AUTO_INCREMENT PRIMARY KEY,
-                    name VARCHAR(100) UNIQUE NOT NULL
-                );
-            """);
-
-            stmt.executeUpdate("""
                 CREATE TABLE Product (
                     product_id INT AUTO_INCREMENT PRIMARY KEY,
                     category_id INT NOT NULL,
@@ -61,8 +54,8 @@ public class StoreDBInitializer {
                 CREATE TABLE Product_Variant (
                     variant_id INT AUTO_INCREMENT PRIMARY KEY,
                     product_id INT NOT NULL,
-                    size ENUM('XXS','XS','S','M','L','XL','XXL') NOT NULL,
-                    color ENUM('Black','White','Grey','Red','Blue','Green','Yellow') NOT NULL,
+                    size_id ENUM('XXS','XS','S','M','L','XL','XXL') NOT NULL,
+                    color_id ENUM('Black','White','Grey','Red','Blue','Green','Yellow') NOT NULL,
                     stock INT NOT NULL DEFAULT 0 CHECK(stock >= 0),
 
                     FOREIGN KEY (product_id)
