@@ -51,6 +51,11 @@ CREATE TABLE Customer_Order (
         FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
+
+	CONSTRAINT fk_variant_order
+		FOREIGN KEY (variant_id) REFERENCES Product_Variant(variant_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE Cart (
