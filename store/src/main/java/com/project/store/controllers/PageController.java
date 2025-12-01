@@ -7,8 +7,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageController {
 
     @GetMapping("/")
-    public String home() {
-        return "login";   // loads login.html
+    public String redirectToLogin() {
+        return "redirect:/login";
     }
 
+    @GetMapping("/login")
+    public String login() { return "login"; }
+
+    @GetMapping("/products")
+    public String products() { return "products"; }
+
+    @GetMapping("/product")
+    public String product() { return "product"; }
+
+    @GetMapping("/cart")
+    public String cart() { return "cart"; }
+
 }
+
+
