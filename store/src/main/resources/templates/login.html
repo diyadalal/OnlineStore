@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Login</title>
+</head>
+
+<body class="full-center">
+
+<div class="login-container">
+    <h1>Welcome!</h1>
+    <h3>Please log in to our e-commerce store:</h3>
+
+    <input type="text" id="firstName" placeholder="First Name" required>
+    <input type="text" id="lastName" placeholder="Last Name" required>
+    <input type="email" id="email" placeholder="Email Address" required>
+    <input type="password" id="password" placeholder="Password" required>
+
+    <button class="login-btn" onclick="login()">Login</button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+    function login() {
+        const first = document.getElementById("firstName").value.trim();
+        const last = document.getElementById("lastName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const message = document.getElementById("message");
+
+        if (!first || !last || !email || !password) {
+            message.textContent = "Please fill out all fields.";
+            message.className = "error";
+            return;
+        }
+
+        message.textContent = "Login successful!";
+        message.className = "success";
+
+        setTimeout(() => {
+            window.location.href = "/products";
+        }, 800);
+    }
+</script>
+
+</body>
+</html>
