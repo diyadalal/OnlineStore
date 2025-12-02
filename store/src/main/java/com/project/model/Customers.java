@@ -2,7 +2,7 @@ package com.project.model;
 
 import java.math.BigDecimal;
 
-public class Customers {
+public class Customer {
     private int customerId;
     private String firstName;
     private String lastName;
@@ -13,10 +13,10 @@ public class Customers {
     private String passwordHash;
 
     // Empty Constructor (often needed by frameworks)
-    public Customers() {}
+    public Customer() {}
 
     // Full Constructor (useful for reading from DB)
-    public Customers(int customerId, String firstName, String lastName, String email, String address, BigDecimal balance, String passwordHash) {
+    public Customer(int customerId, String firstName, String lastName, String email, String address, BigDecimal balance, String passwordHash) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
