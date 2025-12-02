@@ -1,50 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/main.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Login</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 
 <body class="full-center">
 
 <div class="login-container">
     <h1>Welcome!</h1>
-    <h3>Please log in to our e-commerce store:</h3>
+    <h3>Create account or log in:</h3>
 
-    <input type="text" id="firstName" placeholder="First Name" required>
-    <input type="text" id="lastName" placeholder="Last Name" required>
-    <input type="email" id="email" placeholder="Email Address" required>
-    <input type="password" id="password" placeholder="Password" required>
+    <form method="post" action="/login">
+        <input name="firstName" type="text" placeholder="First Name" required>
+        <input name="lastName" type="text" placeholder="Last Name" required>
+        <input name="email" type="email" placeholder="Email" required>
+        <input name="password" type="password" placeholder="Password" required>
+        <button class="login-btn" type="submit">Continue</button>
+    </form>
 
-    <button class="login-btn" onclick="login()">Login</button>
-
-    <p id="message"></p>
+    <p th:if="${param.error}" class="error">Something went wrong.</p>
 </div>
-
-<script>
-    function login() {
-        const first = document.getElementById("firstName").value.trim();
-        const last = document.getElementById("lastName").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const message = document.getElementById("message");
-
-        if (!first || !last || !email || !password) {
-            message.textContent = "Please fill out all fields.";
-            message.className = "error";
-            return;
-        }
-
-        message.textContent = "Login successful!";
-        message.className = "success";
-
-        setTimeout(() => {
-            window.location.href = "/products";
-        }, 800);
-    }
-</script>
 
 </body>
 </html>
