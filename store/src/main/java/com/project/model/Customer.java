@@ -9,7 +9,6 @@ public class Customer {
     private String email;
     private String address; // Combined address string
     private BigDecimal balance;
-    // IMPORTANT: This holds the hashed BCrypt string, NEVER plain text.
     private String passwordHash;
 
     // Empty Constructor (often needed by frameworks)
