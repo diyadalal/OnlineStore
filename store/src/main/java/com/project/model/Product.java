@@ -1,6 +1,7 @@
 package com.project.model;
 
 import java.math.BigDecimal;
+import com.project.enums.Category;
 
 public class Product {
     private int productId;
@@ -29,7 +30,7 @@ public class Product {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public Category getCategory() { return category; }
-    public Category setCategory() { this.category = category; }
+    public void setCategory(Category category) { this.category = category; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
     public String getBrand() { return brand; }
