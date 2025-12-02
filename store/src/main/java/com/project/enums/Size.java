@@ -1,7 +1,7 @@
 package com.project.enums;
 
 public enum Size {
-    XXS, XS, S, M, L, XL, XXL
+    XXS, XS, S, M, L, XL, XXL;
 
     //convert string to enum
     public static Size fromDb(String dbValue) {
