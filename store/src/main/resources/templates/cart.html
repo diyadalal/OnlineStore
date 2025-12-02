@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Your Cart</title>
@@ -12,14 +12,42 @@
     <nav>
         <a href="/products">Products</a>
         <a href="/cart">Cart</a>
-        <a href="/login">Logout</a>
+        <a href="/logout">Logout</a>
     </nav>
 </header>
 
 <section class="section center">
     <h2>Your Shopping Cart</h2>
-    <p>items will appear here</p>
-    <button class="btn">Buy Items</button>
+
+    <!-- message for empty cart-->
+    <p th:if="${#lists.isEmpty(cartItems)}">
+        Your cart is currently empty! Browse to add products.
+    </p>
+
+    <!-- display for when cart has items -->
+    <div th:if="${!#lists.isEmpty(cartItems)}">
+        <table>
+            <tr>
+                <th>Product ID</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Remove</th>
+            </tr>
+
+            <tr th:each="c : ${cartItems}">
+                <td th:text="${c.productId}"></td>
+                <td th:text="${c.color}"></td>
+                <td th:text="${c.size}"></td>
+                <td>
+                    <a th:href="@{/cart/delete(id=${c.cartId})}" class="btn">Remove</a>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+        <a href="/checkout" class="btn">Buy Items</a>
+    </div>
+
 </section>
 
 </body>
