@@ -24,10 +24,10 @@ public class ProductVariant {
     public void setVariantId(int variantId) { this.variantId = variantId; }
     public Integer getProductId() { return productId; }
     public void setProductId(Integer productId) { this.productId = productId; }
-    public Size getSize() { return size; }
-    public void setSize(Size size) { this.size = size; }
     public Color getColor() { return color; }
     public void setColor(Color color) { this.color = color; }
+    public Size getSize() { return size; }
+    public void setSize(Size size) { this.size = size; }
     public Integer getStock() { return stock; }
     public void setStock(Integer stock) { this.stock = stock; }
 }
