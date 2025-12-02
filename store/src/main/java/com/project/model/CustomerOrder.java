@@ -1,9 +1,6 @@
 package com.project.model;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-import com.project.enums.OrderStatus;
 
 public class CustomerOrder {
     private int orderId;
