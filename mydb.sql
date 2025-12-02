@@ -44,7 +44,6 @@ CREATE TABLE Customer_Order (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
     variant_id INT NOT NULL,
-    --quantity INT NOT NULL,
     order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_customer_order
