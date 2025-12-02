@@ -14,7 +14,7 @@ public class CustomerOrder {
 
     public CustomerOrder() {}
 
-    public CustomerOrder(int orderId, int customerId, int variantId, int quantity, BigDecimal totalPriceAtPurchase, String shippingAddressSnapshot, OrderStatus orderStatus, LocalDateTime orderDate) {
+    public CustomerOrder(int orderId, int customerId, int variantId, int quantity, LocalDateTime orderDate) {
         this.orderId = orderId;
         this.customerId = customerId;
         this.variantId = variantId;
