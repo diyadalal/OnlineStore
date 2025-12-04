@@ -139,6 +139,14 @@ public class StoreDBInitializer {
                 ('Winter Coat', 'Coat', 'Thick fleece lined winter coat', 'American Eagle', 105.00, FALSE),
                 ('Athletic Leggings', 'Pants', 'Comfy leggings for sports and the gym', 'Lulu Lemon', 29.99, FALSE),
                 ('Striped Blouse', 'Blouse', 'Casual and sleek women’s blouse', 'Victorias', 27.50, FALSE);
+				('Silk Blouse','Blouse','Elegant silk blouse','ModaLux',49.99,FALSE),
+				('Wool Sweater','Sweater','Warm wool sweater','CozyCo',69.50,FALSE),
+				('Graphic Hoodie','Hoodie','Printed streetwear hoodie','UrbanFit',59.00,FALSE),
+				('Pleated Skirt','Skirt','Chic pleated skirt','LunaWear',39.99,FALSE),
+				('Trench Coat','Coat','Stylish trench coat','MetroStyle',130.00,FALSE),
+				('Cable Sweater','Sweater','Chunky cable-knit sweater','WarmNest',75.00,FALSE),
+				('Maxi Dress','Dress','Flowy ankle-length dress','SerenityWear',60.00,FALSE),
+				('Cargo Pants','Pants','Utility cargo pants','TrailCraft',55.50,FALSE);
             """);
 
 			stmt.executeUpdate("""
@@ -150,7 +158,7 @@ public class StoreDBInitializer {
             	(5, 'Red', 'S', 30),
             	(6, 'Blue', 'M', 25),
             	(7, 'Pink', 'M', 12),
-           		(8, 'Black', 'XL', 3),
+           		(8, 'Black', 'XL', 8),
             	(9, 'White', 'S', 10),
             	(10, 'Purple', 'M', 40),
             	(11, 'Green', 'L', 22),
