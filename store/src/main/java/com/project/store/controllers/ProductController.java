@@ -22,14 +22,14 @@ public class ProductController {
         this.productDAO = productDAO;
         this.variantDAO = variantDAO;
     }
-
+    //displays products from the database 
     @GetMapping("/products")
     public String products(Model model) {
         List<Product> products = productDAO.findAll();
         model.addAttribute("products", products);
         return "products";
     }
-
+    //display details for a specific product
     @GetMapping("/product")
     public String product(@RequestParam int id, Model model) {
         Product p = productDAO.findById(id);
