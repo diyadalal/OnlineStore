@@ -14,11 +14,11 @@ import java.util.List;
 public class CustomerOrderDAOImpl implements CustomerOrderDAO {
 
     private final JdbcTemplate jdbc;
-
+//JDBC Constructor
     public CustomerOrderDAOImpl(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
-
+//Mapping table row to Java objects
     private RowMapper<CustomerOrder> mapper = new RowMapper<CustomerOrder>() {
         @Override
         public CustomerOrder mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -34,7 +34,7 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
             return o;
         }
     };
-
+//Perform functions on the Customer order table through Java functions + SQL statements
     @Override
     public CustomerOrder findById(int orderId) {
         String sql = "SELECT * FROM Customer_Order WHERE order_id = ?";
@@ -69,3 +69,4 @@ public class CustomerOrderDAOImpl implements CustomerOrderDAO {
         return jdbc.update(sql, orderId) > 0;
     }
 }
+
