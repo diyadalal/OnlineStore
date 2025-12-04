@@ -13,11 +13,11 @@ import java.util.List;
 public class CartDAOImpl implements CartDAO {
 
     private final JdbcTemplate jdbc;
-
+//JDBC constructor
     public CartDAOImpl(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
-
+//Maps a row from the Cart table to a Java Object
     private RowMapper<Cart> mapper = new RowMapper<Cart>() {
         @Override
         public Cart mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -28,7 +28,7 @@ public class CartDAOImpl implements CartDAO {
             return c;
         }
     };
-
+//SQL statements for cart functionalities
     @Override
     public Cart findById(int cartId) {
         String sql = "SELECT * FROM Cart WHERE cart_id = ?";
@@ -67,3 +67,4 @@ public class CartDAOImpl implements CartDAO {
         return jdbc.update(sql, customerId) > 0;
     }
 }
+
