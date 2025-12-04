@@ -11,10 +11,14 @@ import java.util.List;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
+//JDBC Constructor
+    private final JdbcTemplate jdbc;
 
     @Autowired
-    private JdbcTemplate jdbc;
-
+    public ProductDAOImpl(JdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
+//Java functions on Product Objects using SQL statements to retrieve database information
     @Override
     public Product findById(int id) {
         String sql = "SELECT * FROM Product WHERE product_id = ?";
@@ -74,3 +78,4 @@ public class ProductDAOImpl implements ProductDAO {
         return jdbc.update(sql, id) > 0;
     }
 }
+
