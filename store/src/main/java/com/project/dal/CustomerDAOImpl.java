@@ -14,12 +14,12 @@ import java.util.List;
 public class CustomerDAOImpl implements CustomerDAO {
 
     private final JdbcTemplate jdbc;
-
+//JDBC constructor
     @Autowired
     public CustomerDAOImpl(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
-
+//Maps customer rows from database to a java object
     private final RowMapper<Customer> customerMapper = new RowMapper<>() {
         @Override
         public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -34,7 +34,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             return c;
         }
     };
-
+//Using SQL statements to perform Java functions on customers
     @Override
     public Customer findById(int id) {
         String sql = "SELECT * FROM Customer WHERE customer_id = ?";
