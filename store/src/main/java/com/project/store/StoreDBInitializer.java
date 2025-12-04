@@ -5,13 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//Creating SQL database through JDBC
 public class StoreDBInitializer {
     public void initialize() {
         String url = "jdbc:mysql://localhost:3306/";
         String user = "root";
         String password = "password"; //change to your SQL username + password when running
 
-        try (Connection conn = DriverManager.getConnection(url, user, password);
+       //try-catch block to handle connection errors
+		try (Connection conn = DriverManager.getConnection(url, user, password);
              Statement stmt = conn.createStatement()) {
 
             stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS clothing_store");
@@ -30,7 +32,6 @@ public class StoreDBInitializer {
 				);
 			""");
 
-
             stmt.executeUpdate("""
 				CREATE TABLE Product (
 					product_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,7 +45,6 @@ public class StoreDBInitializer {
 					CHECK (price > 0)
 				);
 			""");
-
 
             stmt.executeUpdate("""
 				CREATE TABLE Product_Variant (
@@ -102,7 +102,7 @@ public class StoreDBInitializer {
 				);
 			""");
 
-			//15 entries per database table through JDBC
+			//Populating the database with entries through JDBC
 			stmt.executeUpdate("""
             INSERT INTO Customer (first_name, last_name, email, address, balance, password_hash) VALUES
                 ('John', 'Doe', 'john.doe@gmail.com', '123 Main St', 120.50, '1234'),
@@ -198,10 +198,10 @@ public class StoreDBInitializer {
             	(15, 14);
              
             """);
-
+			//confirmation
 			System.out.println("Database created");
 
-
+		//catch block in case of errors
         } catch (SQLException e) {
             e.printStackTrace();
         }
