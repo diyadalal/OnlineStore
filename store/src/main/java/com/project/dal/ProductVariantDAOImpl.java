@@ -11,12 +11,12 @@ import java.util.List;
 public class ProductVariantDAOImpl implements ProductVariantDAO {
 
     private final JdbcTemplate jdbc;
-
+//JDBC Constructor
     @Autowired
     public ProductVariantDAOImpl(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
-
+//Perform functions on ProductVariant Objects through SQL statements to retrieve database information:
     @Override
     public ProductVariant findById(int id) {
         String sql = "SELECT * FROM Product_Variant WHERE variant_id = ?";
@@ -78,3 +78,4 @@ public class ProductVariantDAOImpl implements ProductVariantDAO {
         return jdbc.update(sql, id) > 0;
     }
 }
+
