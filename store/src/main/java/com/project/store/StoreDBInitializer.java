@@ -138,7 +138,7 @@ public class StoreDBInitializer {
                 ('Button-Up Shirt', 'Shirt', 'Casual button shirt', 'Uniqlo', 25.00, FALSE),
                 ('Winter Coat', 'Coat', 'Thick fleece lined winter coat', 'American Eagle', 105.00, FALSE),
                 ('Athletic Leggings', 'Pants', 'Comfy leggings for sports and the gym', 'Lulu Lemon', 29.99, FALSE),
-                ('Striped Blouse', 'Blouse', 'Casual and sleek women’s blouse', 'Victorias', 27.50, FALSE);
+                ('Striped Blouse', 'Blouse', 'Casual and sleek women’s blouse', 'Victorias', 27.50, FALSE),
 				('Silk Blouse','Blouse','Elegant silk blouse','ModaLux',49.99,FALSE),
 				('Wool Sweater','Sweater','Warm wool sweater','CozyCo',69.50,FALSE),
 				('Graphic Hoodie','Hoodie','Printed streetwear hoodie','UrbanFit',59.00,FALSE),
