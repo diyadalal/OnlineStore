@@ -3,6 +3,7 @@ package com.project.store.controllers;
 import com.project.dal.ProductDAO;
 import com.project.dal.ProductVariantDAO;
 import com.project.model.Product;
+import com.project.enums.Category;
 import com.project.model.ProductVariant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +25,26 @@ public class ProductController {
     }
     //displays products from the database 
     @GetMapping("/products")
-    public String products(Model model) {
-        List<Product> products = productDAO.findAll();
+    public String listProducts(
+            @RequestParam(required = false) String category,
+            Model model) {
+
+        List<Product> products;
+
+        if (category == null || category.isBlank()) {
+            products = productDAO.findAll();
+        } else {
+            Category catEnum = Category.fromDb(category);
+            products = productDAO.findByCategory(catEnum);
+            model.addAttribute("selectedCategory", category);
+        }
+
         model.addAttribute("products", products);
+        model.addAttribute("categories", Category.values());
+
         return "products";
     }
+
     //display details for a specific product
     @GetMapping("/product")
     public String product(@RequestParam int id, Model model) {
