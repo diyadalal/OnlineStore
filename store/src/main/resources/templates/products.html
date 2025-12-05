@@ -16,6 +16,22 @@
   </nav>
 </header>
 
+<form action="/products" method="get" class="category-filter">
+  <label for="category">Filter by Category:</label>
+  <select name="category" id="category" onchange="this.form.submit()">
+    <option value="">All Categories</option>
+
+    <!-- Categories -->
+    <th:block th:each="c : ${categories}">
+      <option th:value="${c}"
+              th:text="${c}"
+              th:selected="${c.toString() == selectedCategory}">
+      </option>
+    </th:block>
+  </select>
+</form>
+
+
 <section class="section center">
   <h2>Browse Products</h2>
 
