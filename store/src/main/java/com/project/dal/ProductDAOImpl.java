@@ -3,6 +3,7 @@ package com.project.dal;
 import com.project.dal.ProductDAO;
 import com.project.model.Product;
 import com.project.dal.ProductRowMapper;
+import com.project.enums.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -77,5 +78,12 @@ public class ProductDAOImpl implements ProductDAO {
         String sql = "DELETE FROM Product WHERE product_id = ?";
         return jdbc.update(sql, id) > 0;
     }
+
+    @Override
+    public List<Product> findByCategory(Category category) {
+        String sql = "SELECT * FROM Product WHERE category = ?";
+        return jdbc.query(sql, new ProductRowMapper(), category.toDb());
+    }
 }
+
 
